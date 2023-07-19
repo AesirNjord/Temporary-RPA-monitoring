@@ -123,6 +123,8 @@ async function getService() {
           let ERtime = hosts[0].metadata.ERtime;//任务预期耗时（分钟）
           let caseNo = hosts[0].metadata.caseNo;//当前案件号
           let sTime = hosts[0].metadata.sTime;//任务开始时间
+          let cpuUsage = hosts[0].metadata.cpu;
+          let memoryUsage = hosts[0].metadata.mem;
 
           var Case = {
             caseNo: caseNo,
@@ -140,7 +142,7 @@ async function getService() {
             errorLogger.error(sname + '服务离线,最后运行阶段：' + Rstate + ",当前任务号：" + caseNo)
           }
           else {
-            logger.info(sname + "服务运行中, 案件号：" + caseNo + ",运行阶段：" + Rstate)
+            logger.info(sname + "服务运行中, 案件号：" + caseNo + ",运行阶段：" + Rstate + ',cpu占用率' + cpuUsage + ',内存占用率' + memoryUsage)
           }
           if (Rstate === '任务开始') {
             if (caseNoList2.indexOf(caseNo) == -1) {
